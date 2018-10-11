@@ -8,14 +8,14 @@
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
 }
-
+/* ---------HEADER--------*/
 .App-header {
   width: 100%;
   color: #999;
   position: relative;
   z-index: 9999;
   height: 40px;
-  background-color: #fff;
+  background-color: #0a00ff;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -29,7 +29,7 @@
   width: 3.2%;
   float: left;
 }
-
+/*------------ASIDE--------------*/
 .App-aside {
   background: #192d3f;
   width: 3.2%;
@@ -43,7 +43,7 @@
   justify-content: center;
   color: white;
 }
-
+/*--------ARTICLE----------*/
 .App-article {
   width: 96.8%;
   float: right;
@@ -55,16 +55,109 @@
   justify-content: center;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+/*----------SIDEBAR---------*/
+.sidebar {
+  height: -webkit-fill-available;
+  width: 20%;
+  float: left;
+  background-color: #ffffff;
+  color: #000;
+}
+.box-title {
+  border-bottom: 1px solid rgba(8, 18, 28, 0.1);
+  min-height: 42px;
+  margin: 7px 25px 10px 25px;
+}
+.title-sidebar {
+  font-size: 15px;
+  line-height: 42px;
+  color: #3c3c3c;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.box-item {
+  margin: 35px 25px 20px 25px;
+  border-bottom: 1px solid rgba(8, 18, 28, 0.1);
+}
+.small-title {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #2ea2c7;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.list-box {
+  text-align: left;
+  list-style-type: none;
 }
+
+.list-box li {
+  flex-grow: 1;
+  white-space: nowrap;
+  outline: none;
+  color: #637585;
+  font-size: 14px;
+  line-height: 29px;
+  cursor: pointer;
+}
+
+.list-box li:hover {
+  color: #1c1d1e;
+}
+
+.list-box i {
+  margin-right: 10px;
+}
+/*---------TABLE-----------*/
+.table {
+  height: -webkit-fill-available;
+  width: 80%;
+  float: left;
+  background-color: #eceff4;
+  color: black;
+}
+/* header table*/
+.header-table {
+  height: 50px;
+  background-color: #accdff;
+  width: 100%;
+  color: black;
+}
+.button-box {
+  float: left;
+  width: 100px;
+  height: 25px;
+  margin: 10px;
+}
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+/*table content*/
+.table-content {
+  height: -webkit-fill-available;
+  width: 95%;
+  float: left;
+  color: black;
+  background-color: #eceff4;
+}
+/*right item table*/
+.sidebar-right {
+  height: -webkit-fill-available;
+  width: 5%;
+  float: left;
+  color: black;
+  background-color: #ffffff;
+}
+
