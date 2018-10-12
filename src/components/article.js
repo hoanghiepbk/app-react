@@ -68,11 +68,26 @@ class Content extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: {list}
+            list: [
+                {id: 1, title: 'Với hoàng loạt MV triệu view, hợp đồng quảng cáo \'khủng\', khối tài sản của Sơn Tùng ước tính khoảng bao nhiêu?', zone: 'entertainment', date:'10/1/2018'},
+                {id: 2, title: 'Ronaldo quay lại MU', zone: 'sport', date:'20/1/2018'},
+                {id: 3, title: 'Test1', zone: 'entertainment', date:'10/1/2018'},
+                {id: 4, title: 'Test2', zone: 'sport', date:'11/1/2018'},
+                {id: 5, title: 'Test3', zone: 'entertainment', date:'10/1/2018'},
+                {id: 6, title: 'Test4', zone: 'sport', date:'12/1/2018'},
+                {id: 7, title: 'Test5', zone: 'entertainment', date:'22/1/2018'},
+                {id: 8, title: 'Test6', zone: 'sport', date:'15/1/2018'},
+                {id: 9, title: 'Test7', zone: 'entertainment', date:'10/1/2018'},
+            ],
+            list2: []
         };
 
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this);
+    }
+    addList2 = (item) => {
+        let newList2 = this.state.list2.concat(item);
+        this.setState({list2: newList2})
     }
     render() {
         return (
@@ -159,7 +174,7 @@ class Content extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <List list={list} />
+                                <List list={this.state.list2} />
                             </div>
                             <div className="sidebar-right">
                                 <span>ListItem</span>
