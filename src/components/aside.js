@@ -4,7 +4,9 @@ class Aside extends Component {
     render() {
         return (
             <div>
-                <span>Aside</span>
+                <div className="aside-item">
+                    <i className="el-icon-edit"></i>
+                </div>
             </div>
         );
     }

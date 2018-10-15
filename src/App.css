@@ -10,12 +10,13 @@
 }
 /* ---------HEADER--------*/
 .App-header {
+  border-bottom: 1px solid rgba(8, 18, 28, 0.1);
   width: 100%;
   color: #999;
   position: relative;
   z-index: 9999;
   height: 40px;
-  background-color: #0a00ff;
+  background-color: #ffffff;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -29,6 +30,27 @@
   width: 3.2%;
   float: left;
 }
+
+.one-nav-item {
+  color: #797979;
+  width: 50px;
+  float: left;
+  font-size: 28px;
+  margin: 5px 0px 0px 0px;
+  cursor: pointer;
+}
+.one-nav-item-2 {
+  margin: 10px;
+  float: left;
+  font-size: 16px;
+  cursor: pointer;
+}
+.one-nav-item-3 {
+  margin: 10px;
+  font-size: 26px;
+  color: #797979;
+  cursor: pointer;
+}
 /*------------ASIDE--------------*/
 .App-aside {
   background: #192d3f;
@@ -38,19 +60,23 @@
   z-index: 12;
   float: left;
   height: 350vh;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   color: white;
 }
+.aside-item {
+  margin-top: 20px;
+}
 /*--------ARTICLE----------*/
 .App-article {
+  align-items: center;
   width: 96.8%;
   float: right;
   background-color: #eceff4;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  text-align: center;
   justify-content: center;
   color: white;
 }
@@ -335,12 +361,13 @@
   position: absolute;
 }
 .avatar {
+  background-image: url("./img/avatar2.jpg");
+  background-size: contain;
   float: left;
   width: 64px;
   height: 64px;
   flex: none;
   display: block;
-  background: gray;
 }
 .detail-main-info {
     float: left;
