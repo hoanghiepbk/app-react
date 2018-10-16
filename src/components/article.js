@@ -64,8 +64,52 @@ class Content extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            lists: [
+                {
+                    id:1,
+                    day: '15/10/2018',
+                    items: [
+                        {id: 1, title: 'Với hoàng loạt MV triệu view, hợp đồng quảng cáo \'khủng\', khối tài sản của Sơn Tùng ước tính khoảng bao nhiêu?', zone: 'entertainment', view: '312'},
+                        {id: 2, title: 'Ronaldo quay lại MU', zone: 'sport',view: '12'},
+                        {id: 3, title: 'Test1', zone: 'entertainment',view: '34312'},
+                    ]
+                },
+                {
+                    id:2,
+                    day: '16/10/2018',
+                    items: [
+                        {id: 1, title: 'Test2', zone: 'sport',view: '312'},
+                        {id: 2, title: 'Test3', zone: 'entertainment',view: '4312'},
+                    ]
+                },
+                {
+                    id:3,
+                    day: '17/10/2018',
+                    items: [
+                        {id: 1, title: 'Test4', zone: 'sport',view: '312'},
+                        {id: 2, title: 'Test5', zone: 'entertainment',view: '4312'},
+                    ]
+                },
+                {
+                    id:4,
+                    day: '18/10/2018',
+                    items: [
+                        {id: 1, title: 'Test55', zone: 'sport',view: '312'},
+                        {id: 2, title: 'Test6', zone: 'entertainment',view: '4312'},
+                        {id: 3, title: 'Test7', zone: 'sport',view: '44312'},
+                    ]
+                },
+                {
+                    id:5,
+                    day: '19/10/2018',
+                    items: [
+                        {id: 1, title: 'Test8', zone: 'sport',view: '312'},
+                        {id: 2, title: 'Test9', zone: 'entertainment',view: '4312'},
+                    ]
+                }
+            ],
             list: [
-                {id: 1, title: 'Với hoàng loạt MV triệu view, hợp đồng quảng cáo \'khủng\', khối tài sản của Sơn Tùng ước tính khoảng bao nhiêu?', zone: 'entertainment', date:'15/10/2018', view: '312'},
+                {id: 1, title: 'Với hoàng loạt MV triệu ', zone: 'entertainment', date:'15/10/2018', view: '312'},
                 {id: 2, title: 'Ronaldo quay lại MU', zone: 'sport', date:'15/10/2018',view: '12'},
                 {id: 3, title: 'Test1', zone: 'entertainment', date:'15/10/2018',view: '34312'},
                 {id: 4, title: 'Test2', zone: 'sport', date:'18/10/2018',view: '312'},
@@ -175,17 +219,20 @@ class Content extends Component {
     }
     handleFilter() {
         const selectedZone = this.state.selectedZone
-        const dateStart = this.state.dateStart.getUTCDate() + 1
-        console.log(dateStart)
-        const monthStart = this.state.dateStart.getUTCMonth() + 1
-        console.log(monthStart)
-        const yearStart = this.state.dateStart.getUTCFullYear()
-        const dateEnd = this.state.dateEnd.getUTCDate() + 1
-        const monthEnd = this.state.dateEnd.getUTCMonth() + 1
-        const yearEnd = this.state.dateEnd.getUTCFullYear()
+        const dateS = this.state.dateStart
+        const dateE = this.state.dateEnd
+        if (dateS !== '' && dateE !== '') {
+            var dateStart = this.state.dateStart.getUTCDate() + 1
+            var monthStart = this.state.dateStart.getUTCMonth() + 1
+            var yearStart = this.state.dateStart.getUTCFullYear()
+            var dateEnd = this.state.dateEnd.getUTCDate() + 1
+            var monthEnd = this.state.dateEnd.getUTCMonth() + 1
+            var yearEnd = this.state.dateEnd.getUTCFullYear()
+        }
         const listItems = this.state.list
         const list2 = []
-        if (selectedZone !== '' && dateStart !== '' && dateEnd !== '') {
+        if (selectedZone !== '' && dateS !== '' && dateE !== '') {
+            console.log('1')
             for (let i = 0; i < listItems.length; i ++) {
                 if (listItems[i].zone === selectedZone || selectedZone === "all") {
                     const a = listItems[i].date.split("/")
@@ -196,7 +243,8 @@ class Content extends Component {
                 }
             }
         }
-        if (selectedZone === '' && dateStart !== '' && dateEnd !== ''){
+        if (selectedZone === '' && dateS !== '' && dateE !== ''){
+            console.log('2')
             for (let i = 0; i < listItems.length; i ++) {
                 const a = listItems[i].date.split("/")
                 if (yearStart <= a[2] && a[2] <= yearEnd && monthStart <= a[1] && a[1] <= monthEnd && dateStart <= a[0] && a[0] <= dateEnd) {
@@ -204,7 +252,8 @@ class Content extends Component {
                 }
             }
         }
-        if (selectedZone !== '' && dateStart === '' && dateEnd === '') {
+        if (selectedZone !== '' && dateS === '' && dateE === '') {
+            console.log('3')
             for (let i = 0; i < listItems.length; i ++) {
                 if (listItems[i].zone === selectedZone || selectedZone === "all") {
                     list2.push(listItems[i])
