@@ -59,7 +59,7 @@
   position: relative;
   z-index: 12;
   float: left;
-  height: 350vh;
+  height: 100%;
   align-items: baseline;
   justify-content: center;
   color: white;
@@ -73,7 +73,8 @@
   width: 96.8%;
   float: right;
   background-color: #eceff4;
-  min-height: 100vh;
+  min-height: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -82,7 +83,7 @@
 }
 /*----------SIDEBAR---------*/
 .sidebar {
-  height: 340vh;
+  height: 100%;
   width: 20%;
   float: left;
   background-color: #ffffff;
@@ -139,7 +140,7 @@
 }
 /*---------TABLE-----------*/
 .table {
-  height: 340vh;
+  height: 100%;
   width: 80%;
   float: left;
   background-color: #F8F8F8;
@@ -257,7 +258,7 @@
   margin-top: 32px;
   color: #424649;
   font-size: 13px;
-  margin-right: 21px;
+  margin-right: 5px;
 }
 .pagination {
   float: right;
