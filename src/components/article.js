@@ -7,11 +7,86 @@ import locale from 'element-react/src/locale/lang/en'
 import moment from 'moment'
 i18n.use(locale);
 
+class Popup extends React.Component {
+    render() {
+        return (
+            <div className='popup'>
+                <div className='popup_inner'>
+                    <div className="popup-header">
+                        <div className="btn-group">
+                            <span className="btn"><i className="fa fa-history"aria-hidden="true" style={{"margin-right": '5px'}}></i>Xem lịch sử</span>
+                            <span className="btn"><i className="fa fa-files-o" aria-hidden="true" style={{"margin-right": '5px'}}></i>So sánh phiên bản</span>
+                        </div>
+                        <div><span onClick={this.props.closePopup}><i className="fa fa-times" style={{'font-size': '30px', 'margin-left': '100px','cursor': 'pointer'}}></i></span></div>
+                    </div>
+                    <div className="popup-main">
+                        <div className="popup-main-content">
+                                    <div className="editable-container ">
+                                        <div className="title-info" style={{"padding": '0 30px','text-align': 'left'}}>
+                                            <div className="txtTitle">
+                                                {this.props.detailInfo.Title}
+                                            </div>
+                                            <div className="text">
+                                                {this.props.detailInfo.Sapo}
+                                            </div>
+                                        </div>
+                                        <div className="content-main">
+                                            <div className="content-info">
+                                                <div dangerouslySetInnerHTML={{__html: this.props.detailInfo.Body }} />;
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div className="popup-sidebar">
+                            <div className="panel-content">
+                                <div className="sidebar-info">
+                                    <section>
+                                        <header>Thông tin cơ bản</header>
+                                        <div className="section-content">
+                                            <div className="row-info"><label>Avatar</label>
+                                                <div className="avatar-wrap">
+                                                    <span title="Avatar thường">
+                                                        <img className="avatar-item" src="this.this.props.detailInfo.AvatarCustom" alt="avt"/>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="row-info"><label>Dạng bài</label><span>Bài thường (size M)</span>
+                                            </div>
+                                            <div className="row-info"><label>Tác giả</label><span>{this.props.detailInfo.Author}</span>
+                                            </div>
+                                            <div className="row-info"><label>Ngày xuất bản</label><span>{moment(this.props.detailInfo.CreatedDate).format('DD/MM/YYYY')}</span>
+                                            </div>
+                                            <div className="row-info"><label>Tags</label>Chưa
+                                                chọn tag</div>
+                                            <div className="row-info"><label>Cho phép hiển thị trên trang
+                                                chủ</label><span>Không</span></div>
+                                            <div className="row-info"><label>Là bài
+                                                AdStore</label><span>Không</span></div>
+                                            <div className="row-info"><label>Là bài PR</label><span>Không</span>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <header>Cài đặt phân phối</header>
+                                        <div className="section-content">
+                                            <div className="row-info"><label>Chuyên mục chính</label><span>Thế giới</span>
+                                            </div>
+                                            <div className="row-info"><label>Chuyên mục phụ</label><span>Thế giới</span>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
 function Items(props) {
     console.log('render 2')
     const list = props.list
-    const show = props.show
-    const showFormDetail = props.showFormDetail
     const listItems = list.map((list) =>
         <div className="list-detail">
             <div className="list-detail-main">
@@ -23,23 +98,8 @@ function Items(props) {
                 <div className="detail-info">
                     <img className="avatar"/>
                     <div className="detail-main-info">
-                        <div className="detail-info-title" onClick={ () => showFormDetail(true) }>
+                        <div className="detail-info-title" onClick={() => props.togglePopup(list, list.EncryptId)}>
                             {list.Title}
-                            <Dialog
-                                title="Tips"
-                                size="tiny"
-                                visible={ show }
-                                onCancel={ () => showFormDetail(false) }
-                                lockScroll={ false }
-                            >
-                                <Dialog.Body>
-                                    <span>This is a message</span>
-                                </Dialog.Body>
-                                <Dialog.Footer className="dialog-footer">
-                                    <Button onClick={ () => showFormDetail(false) }>Cancel</Button>
-                                    <Button type="primary" onClick={ () => showFormDetail(false) }>Confirm</Button>
-                                </Dialog.Footer>
-                            </Dialog>
                         </div>
                         <div className="author">
                             Viết bởi {list.Author}, biên tập bới {list.CreatedBy}
@@ -70,8 +130,6 @@ function Items(props) {
 function List(props) {
     console.log('render')
     const list = props.list
-    const show = props.show
-    const showFormDetail = props.showFormDetail
     const listItems = list.map((list) =>
         <li>
             <div className="main-table">
@@ -82,8 +140,7 @@ function List(props) {
                         </div>
                         <Items
                             list = {list.list}
-                            showFormDetail = {showFormDetail}
-                            show = {show}
+                            togglePopup = {props.togglePopup}
                         />
                     </div>
                 </div>
@@ -100,59 +157,7 @@ class Content extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lists: [
-                {
-                    id:1,
-                    date: '15/10/2018',
-                    items: [
-                        {id: 1, title: 'Với hoàng loạt MV triệu view, hợp đồng quảng cáo \'khủng\', khối tài sản của Sơn Tùng ước tính khoảng bao nhiêu?', zone: 'entertainment', view: '312',date: '15/10/2018',},
-                        {id: 2, title: 'Ronaldo quay lại MU', zone: 'sport',view: '12',date: '15/10/2018',},
-                        {id: 3, title: 'Test1', zone: 'entertainment',view: '34312',date: '15/10/2018',},
-                    ]
-                },
-                {
-                    id:2,
-                    date: '16/10/2018',
-                    items: [
-                        {id: 1, title: 'Test2', zone: 'sport',view: '312',date: '16/10/2018',},
-                        {id: 2, title: 'Test3', zone: 'entertainment',view: '4312',date: '16/10/2018',},
-                    ]
-                },
-                {
-                    id:3,
-                    date: '17/10/2018',
-                    items: [
-                        {id: 1, title: 'Test4', zone: 'sport',view: '312',date: '17/10/2018',},
-                        {id: 2, title: 'Test5', zone: 'entertainment',view: '4312',date: '17/10/2018',},
-                    ]
-                },
-                {
-                    id:4,
-                    date: '18/10/2018',
-                    items: [
-                        {id: 1, title: 'Test55', zone: 'sport',view: '312',date: '18/10/2018',},
-                        {id: 2, title: 'Test6', zone: 'entertainment',view: '4312',date: '18/10/2018',},
-                        {id: 3, title: 'Test7', zone: 'sport',view: '44312',date: '18/10/2018',},
-                    ]
-                },
-                {
-                    id:5,
-                    date: '19/10/2018',
-                    items: [
-                        {id: 1, title: 'Test8', zone: 'sport',view: '312',date: '19/10/2018',},
-                        {id: 2, title: 'Test9', zone: 'entertainment',view: '4312',date: '19/10/2018',},
-                    ]
-                }
-            ],
             list: [],
-            list4: [
-                {id: 1, title: 'Test55', zone: 'sport',view: '312',date: '18/10/2018',},
-                {id: 2, title: 'Test6', zone: 'entertainment',view: '4312',date: '18/10/2018',},
-                {id: 3, title: 'Test7', zone: 'sport',view: '44312',date: '18/10/2018',},
-                {id: 4, title: 'Với hoàng loạt MV triệu view, hợp đồng quảng cáo \'khủng\', khối tài sản của Sơn Tùng ước tính khoảng bao nhiêu?', zone: 'entertainment', view: '312',date: '15/10/2018',},
-                {id: 5, title: 'Ronaldo quay lại MU', zone: 'sport',view: '12',date: '15/10/2018',},
-                {id: 6, title: 'Test1', zone: 'entertainment',view: '34312',date: '15/10/2018',},
-            ],
             list2: [],
             list3: [],
             listFilter: [],
@@ -167,7 +172,10 @@ class Content extends Component {
             selectedZone: '',
             dateStart: '',
             dateEnd: '',
-            dialogVisible: false
+            dialogVisible: false,
+            showPopup: false,
+            detailInfo: {},
+            body: null
         };
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this);
@@ -178,21 +186,53 @@ class Content extends Component {
         this.getList = this.getList.bind(this);
         this.getListZone = this.getListZone.bind(this);
         this.showFormDetail = this.showFormDetail.bind(this);
+        this.togglePopup = this.togglePopup.bind(this);
+    }
+    togglePopup(val, id) {
+        const ID = id
+        const body = val.Body
+        let getNodes = str => new DOMParser().parseFromString(str, 'text/html').body.childNodes;
+        let nodes = getNodes(body);
+        this.setState({
+            body: nodes
+        });
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
+        var promise = new Promise(function(resolve, reject) {
+            var request = new XMLHttpRequest();
+            request.onload = function() {
+                if (request.status == 200) {
+                    resolve(request.response); // we got data here, so resolve the Promise
+                } else {
+                    reject(Error(request.statusText)); // status is not 200 OK, so reject
+                }
+            };
+            request.open("POST", "http://192.168.25.95:8088/api/base/news/get_news_detail_by_id", true);
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwMDc4NTcsIm5iZiI6MTUzOTkyMTQ1N30.tarNSMPowuzxqyPO3cueobyuZYTSRd5TfYtdEcxwHkWV9k8ugp_jHOm1zc0O0JVI");
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            const data = {
+                id: ID
+            }
+            var params = typeof data == 'string' ? data : Object.keys(data).map(
+                function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
+            ).join('&');
+            request.send(params);
+        });
+        promise.then(function(data) {
+            console.log('Got data! Get list.');
+            var a = data
+            var b = JSON.parse(a)
+            var c = b.Data.NewsInfo
+            console.log(c)
+            this.setState({detailInfo: c})
+
+        }.bind(this)).catch(function(error) {
+            console.log('Error occurred!', error);
+        });
     }
     showFormDetail(val) {
         this.setState({ dialogVisible: val })
-    }
-    addList2() {
-        let a = this.state.a;
-        let b = this.state.b;
-        const newList2 = [];
-        const listItems = this.state.lists
-        for (let i = 0; i < 2; i++) {
-            if (listItems[i] !== undefined) {
-                newList2.push(listItems[i])
-            }
-        }
-        this.setState({list2: newList2})
     }
     handleNextPage() {
         if (this.state.list.length === 50) {
@@ -331,7 +371,7 @@ class Content extends Component {
                 }
             };
             request.open("POST", "http://192.168.25.95:8088/api/base/news/search_news", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6IkYxOU5hck1qelk0LzNkam1PT2pCblE9PSIsInN1YiI6ImZ4UWRlL2JnUDYweUxLK2xoekpjdlE9PSIsIm5zcCI6Ik4zaVcyeDN0U3NRbWJjSHJoTGUyV1E9PSIsImxhbmciOiJ0S3NTVDloVDI4VXNoOHI0OUxLbGhnPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1Mzk5MjAwODQsIm5iZiI6MTUzOTgzMzY4NH0.qJKe0uOsSeP_rfax4k9aJ9wbgs0NoXZdSheiEVGDQExrS9EDKvXOr_T9FAaSvyd3");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwMDc4NTcsIm5iZiI6MTUzOTkyMTQ1N30.tarNSMPowuzxqyPO3cueobyuZYTSRd5TfYtdEcxwHkWV9k8ugp_jHOm1zc0O0JVI");
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const data = {
                 zone: selectedZone,
@@ -442,7 +482,7 @@ class Content extends Component {
                 }
             };
             request.open("GET", "http://192.168.25.95:8088/api/base/news/get_all_zone", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6IkYxOU5hck1qelk0LzNkam1PT2pCblE9PSIsInN1YiI6ImZ4UWRlL2JnUDYweUxLK2xoekpjdlE9PSIsIm5zcCI6Ik4zaVcyeDN0U3NRbWJjSHJoTGUyV1E9PSIsImxhbmciOiJ0S3NTVDloVDI4VXNoOHI0OUxLbGhnPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1Mzk5MjAwODQsIm5iZiI6MTUzOTgzMzY4NH0.qJKe0uOsSeP_rfax4k9aJ9wbgs0NoXZdSheiEVGDQExrS9EDKvXOr_T9FAaSvyd3");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwMDc4NTcsIm5iZiI6MTUzOTkyMTQ1N30.tarNSMPowuzxqyPO3cueobyuZYTSRd5TfYtdEcxwHkWV9k8ugp_jHOm1zc0O0JVI");
             request.send();
         });
         promise.then(function(data) {
@@ -466,7 +506,7 @@ class Content extends Component {
                 }
             };
             request.open("POST", "http://192.168.25.95:8088/api/base/news/list_news_by_status", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6IkYxOU5hck1qelk0LzNkam1PT2pCblE9PSIsInN1YiI6ImZ4UWRlL2JnUDYweUxLK2xoekpjdlE9PSIsIm5zcCI6Ik4zaVcyeDN0U3NRbWJjSHJoTGUyV1E9PSIsImxhbmciOiJ0S3NTVDloVDI4VXNoOHI0OUxLbGhnPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1Mzk5MjAwODQsIm5iZiI6MTUzOTgzMzY4NH0.qJKe0uOsSeP_rfax4k9aJ9wbgs0NoXZdSheiEVGDQExrS9EDKvXOr_T9FAaSvyd3");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwMDc4NTcsIm5iZiI6MTUzOTkyMTQ1N30.tarNSMPowuzxqyPO3cueobyuZYTSRd5TfYtdEcxwHkWV9k8ugp_jHOm1zc0O0JVI");
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const data = {
                 status: '8',
@@ -527,7 +567,6 @@ class Content extends Component {
             console.log(listSort)
             this.setState({listSort: listSort})
         })
-        this.addList2()
         this.getListZone()
     }
     render() {
@@ -637,9 +676,16 @@ class Content extends Component {
                                 </div>
                                 <List
                                     list={this.state.listSort}
-                                    showFormDetail={value => this.setState({dialogVisible: value})}
-                                    show={this.state.dialogVisible}
+                                    togglePopup={(value, id) => this.togglePopup(value, id)}
                                 />
+                                {this.state.showPopup ?
+                                    <Popup
+                                        closePopup={this.togglePopup.bind(this)}
+                                        detailInfo = {this.state.detailInfo}
+                                        body = {this.state.body}
+                                    />
+                                    : null
+                                }
                             </div>
                             <div className="sidebar-right">
                                 <div className="one-nav-item-3">
