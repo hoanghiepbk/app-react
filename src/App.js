@@ -13,16 +13,19 @@ class App extends Component {
             <Header></Header>
           </div>
         </header>
-        <aside className="App-aside">
-          <div style={{width: 100 + '%'}}>
-            <Aside></Aside>
-          </div>
-        </aside>
-        <article className="App-article">
-          <div style={{width: 100 + '%', height: 100 + '%'}}>
-            <Article></Article>
-          </div>
-        </article>
+      <div className="container">
+          <aside className="App-aside">
+              <div style={{width: 100 + '%'}}>
+                  <Aside></Aside>
+              </div>
+          </aside>
+          <article className="App-article">
+              <div style={{width: 100 + '%', height: 100 + '%'}}>
+                  <Article></Article>
+              </div>
+          </article>
+      </div>
+
       </div>
     );
   }

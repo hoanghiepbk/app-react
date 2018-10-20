@@ -21,21 +21,21 @@ class Popup extends React.Component {
                     </div>
                     <div className="popup-main">
                         <div className="popup-main-content">
-                                    <div className="editable-container ">
-                                        <div className="title-info" style={{"padding": '0 30px','text-align': 'left'}}>
-                                            <div className="txtTitle">
-                                                {this.props.detailInfo.Title}
-                                            </div>
-                                            <div className="text">
-                                                {this.props.detailInfo.Sapo}
-                                            </div>
-                                        </div>
-                                        <div className="content-main">
-                                            <div className="content-info">
-                                                <div dangerouslySetInnerHTML={{__html: this.props.detailInfo.Body }} />;
-                                            </div>
-                                        </div>
+                            <div className="editable-container ">
+                                <div className="title-info" style={{"padding": '0 30px','text-align': 'left'}}>
+                                    <div className="txtTitle">
+                                        {this.props.detailInfo.Title}
                                     </div>
+                                    <div className="text">
+                                        {this.props.detailInfo.Sapo}
+                                    </div>
+                                </div>
+                                <div className="content-main">
+                                    <div className="content-info">
+                                        <div dangerouslySetInnerHTML={{__html: this.props.detailInfo.Body }} />;
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div className="popup-sidebar">
                             <div className="panel-content">
@@ -46,7 +46,7 @@ class Popup extends React.Component {
                                             <div className="row-info"><label>Avatar</label>
                                                 <div className="avatar-wrap">
                                                     <span title="Avatar thường">
-                                                        <img className="avatar-item" src="this.this.props.detailInfo.AvatarCustom" alt="avt"/>
+                                                        <img className="avatar-item" src={this.props.detailInfo.AvatarCustom} alt="avt"/>
                                                     </span>
                                                 </div>
                                             </div>
@@ -148,7 +148,7 @@ function List(props) {
         </li>
     );
     return (
-        <ul style={{'list-style-type': 'none'}}>
+        <ul className="form-list-item">
             {listItems}
         </ul>
     );
@@ -209,7 +209,7 @@ class Content extends Component {
                 }
             };
             request.open("POST", "http://192.168.25.95:8088/api/base/news/get_news_detail_by_id", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwMDc4NTcsIm5iZiI6MTUzOTkyMTQ1N30.tarNSMPowuzxqyPO3cueobyuZYTSRd5TfYtdEcxwHkWV9k8ugp_jHOm1zc0O0JVI");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwODgzNzYsIm5iZiI6MTU0MDAwMTk3Nn0.puUCtPCXPoCKztfh5sgpYhB0vX5XBLsX1aWSSg1WgI3Pe_cyGGRKtPO6kcaHnUUp");
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const data = {
                 id: ID
@@ -371,7 +371,7 @@ class Content extends Component {
                 }
             };
             request.open("POST", "http://192.168.25.95:8088/api/base/news/search_news", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwMDc4NTcsIm5iZiI6MTUzOTkyMTQ1N30.tarNSMPowuzxqyPO3cueobyuZYTSRd5TfYtdEcxwHkWV9k8ugp_jHOm1zc0O0JVI");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwODgzNzYsIm5iZiI6MTU0MDAwMTk3Nn0.puUCtPCXPoCKztfh5sgpYhB0vX5XBLsX1aWSSg1WgI3Pe_cyGGRKtPO6kcaHnUUp");
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const data = {
                 zone: selectedZone,
@@ -482,7 +482,7 @@ class Content extends Component {
                 }
             };
             request.open("GET", "http://192.168.25.95:8088/api/base/news/get_all_zone", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwMDc4NTcsIm5iZiI6MTUzOTkyMTQ1N30.tarNSMPowuzxqyPO3cueobyuZYTSRd5TfYtdEcxwHkWV9k8ugp_jHOm1zc0O0JVI");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwODgzNzYsIm5iZiI6MTU0MDAwMTk3Nn0.puUCtPCXPoCKztfh5sgpYhB0vX5XBLsX1aWSSg1WgI3Pe_cyGGRKtPO6kcaHnUUp");
             request.send();
         });
         promise.then(function(data) {
@@ -506,7 +506,7 @@ class Content extends Component {
                 }
             };
             request.open("POST", "http://192.168.25.95:8088/api/base/news/list_news_by_status", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwMDc4NTcsIm5iZiI6MTUzOTkyMTQ1N30.tarNSMPowuzxqyPO3cueobyuZYTSRd5TfYtdEcxwHkWV9k8ugp_jHOm1zc0O0JVI");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwODgzNzYsIm5iZiI6MTU0MDAwMTk3Nn0.puUCtPCXPoCKztfh5sgpYhB0vX5XBLsX1aWSSg1WgI3Pe_cyGGRKtPO6kcaHnUUp");
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const data = {
                 status: '8',
@@ -631,37 +631,39 @@ class Content extends Component {
                         <div className='body-table'>
                             <div className="table-content">
                                 <div className="nav-table">
-                                    <div style={{width: 150 + 'px'}}>
-                                        <Select value={this.state.value} placeholder={'Chuyên mục'} onChange={this.selectedZone}>
-                                            {
-                                                this.state.listZone.map(el => {
-                                                    return <Select.Option key={el.Id} label={el.Name} value={el.Id} />
-                                                })
-                                            }
-                                        </Select>
-                                    </div>
-                                    <div style={{'margin-left': 15 + 'px'}}>
-                                        <DatePicker
-                                            value={this.state.dateStart}
-                                            placeholder="Ngày bắt đầu"
-                                            onChange={date=>{
-                                                console.debug('DatePicker1 changed: ', date)
-                                                this.setState({dateStart: date})
-                                            }}
-                                        />
-                                    </div>
-                                    <div style={{'margin-left': 15 + 'px'}}>
-                                        <DatePicker
-                                            value={this.state.dateEnd}
-                                            placeholder="Ngày kết thúc"
-                                            onChange={date=>{
-                                                console.debug('DatePicker1 changed: ', date)
-                                                this.setState({dateEnd: date})
-                                            }}
-                                        />
-                                    </div>
-                                    <div className="button-nav" style={{background: '#FAFAFA'}} onClick={this.handleFilter}>
-                                        LỌC
+                                    <div className="nav-button">
+                                        <div style={{width: 150 + 'px'}}>
+                                            <Select value={this.state.value} placeholder={'Chuyên mục'} onChange={this.selectedZone}>
+                                                {
+                                                    this.state.listZone.map(el => {
+                                                        return <Select.Option key={el.Id} label={el.Name} value={el.Id} />
+                                                    })
+                                                }
+                                            </Select>
+                                        </div>
+                                        <div style={{'margin-left': 15 + 'px'}}>
+                                            <DatePicker
+                                                value={this.state.dateStart}
+                                                placeholder="Ngày bắt đầu"
+                                                onChange={date=>{
+                                                    console.debug('DatePicker1 changed: ', date)
+                                                    this.setState({dateStart: date})
+                                                }}
+                                            />
+                                        </div>
+                                        <div style={{'margin-left': 15 + 'px'}}>
+                                            <DatePicker
+                                                value={this.state.dateEnd}
+                                                placeholder="Ngày kết thúc"
+                                                onChange={date=>{
+                                                    console.debug('DatePicker1 changed: ', date)
+                                                    this.setState({dateEnd: date})
+                                                }}
+                                            />
+                                        </div>
+                                        <div className="button-nav" style={{background: '#FAFAFA'}} onClick={this.handleFilter}>
+                                            LỌC
+                                        </div>
                                     </div>
                                     <div className="pagination-box">
                                         <div className="pagination-p">

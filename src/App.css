@@ -1,7 +1,9 @@
 .App {
+  width: 100%;
   text-align: center;
   font-family: Arial;
   font-size: 13px;
+  height: 100%;
 }
 html, body, .app {
   margin: 0;
@@ -9,6 +11,25 @@ html, body, .app {
   position: relative;
   width: 100%;
   height: 100vh;
+}
+#root {
+  display: flex;
+  flex-direction: inherit;
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.form-list-item {
+  list-style-type: none;
+  height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
 }
 /*------------POPUP-----------------*/
 .popup {
@@ -91,6 +112,7 @@ html, body, .app {
   transition: all .2s ease-in-out;
 }
 .popup-main {
+  display: flex;
   position: relative;
   width: 100%;
   height: calc(100% - 66px);
@@ -125,10 +147,10 @@ html, body, .app {
   font-family: SFD-Bold;
 }
 .popup-main-content {
-  float: left;
   width: 1127px;
   background-color: #F4F4F4;
   overflow-y: scroll;
+  flex-grow: inherit;
 }
 .content-main{
   position: relative;
@@ -225,7 +247,9 @@ html, body, .app {
   width: 3.2%;
   float: left;
 }
-
+.nav-button {
+  display: flex;
+}
 .one-nav-item {
   color: #797979;
   width: 50px;
@@ -254,7 +278,7 @@ html, body, .app {
   position: relative;
   z-index: 12;
   float: left;
-  height: 1120vh;
+  height: 100%;
   align-items: baseline;
   justify-content: center;
   color: white;
@@ -268,7 +292,7 @@ html, body, .app {
   width: 96.8%;
   float: right;
   background-color: #eceff4;
-  height: 1110vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -277,11 +301,14 @@ html, body, .app {
 }
 /*----------SIDEBAR---------*/
 .sidebar {
-  height: 1110vh;
+  display: flex;
+  height: -webkit-fill-available;
   width: 20%;
   float: left;
   background-color: #ffffff;
   color: #000;
+  flex-direction: column;
+  overflow-y: scroll;
 }
 .box-title {
   border-bottom: 1px solid rgba(8, 18, 28, 0.1);
@@ -334,11 +361,13 @@ html, body, .app {
 }
 /*---------TABLE-----------*/
 .table {
-  height: 1110vh;
+  display: flex;
+  height: 100%;
   width: 80%;
   float: left;
   background-color: #F8F8F8;
   color: black;
+  flex-direction: column;
 }
 /* header table*/
 .header-table {
@@ -422,7 +451,7 @@ html, body, .app {
   margin-right: 7px;
 }
 .table-content {
-  height: 1110vh;
+  height: 100%;
   width: 95%;
   float: left;
   color: black;
@@ -445,7 +474,7 @@ html, body, .app {
 }
 .pagination-box {
   float: left;
-  margin-left: 172px;
+  margin-left: 200px;
 }
 .pagination-p {
   float: left;
@@ -604,7 +633,7 @@ html, body, .app {
 }
 /*right item table*/
 .sidebar-right {
-  height: 1110vh;
+  height: 100%;
   width: 5%;
   float: left;
   color: black;
