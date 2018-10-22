@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../App.css'
-import { Select, DatePicker,Dialog, Button } from 'element-react';
+import { Select, DatePicker,Dialog, Button, Loading } from 'element-react';
 import 'element-theme-default';
 import { i18n } from 'element-react';
 import locale from 'element-react/src/locale/lang/en'
@@ -10,77 +10,79 @@ i18n.use(locale);
 class Popup extends React.Component {
     render() {
         return (
-            <div className='popup'>
-                <div className='popup_inner'>
-                    <div className="popup-header">
-                        <div className="btn-group">
-                            <span className="btn"><i className="fa fa-history"aria-hidden="true" style={{"margin-right": '5px'}}></i>Xem lịch sử</span>
-                            <span className="btn"><i className="fa fa-files-o" aria-hidden="true" style={{"margin-right": '5px'}}></i>So sánh phiên bản</span>
+                <div className='popup'>
+                    <div className='popup_inner'>
+                        <div className="popup-header">
+                            <div className="btn-group">
+                                <span className="btn"><i className="fa fa-history"aria-hidden="true" style={{"margin-right": '5px'}}></i>Xem lịch sử</span>
+                                <span className="btn"><i className="fa fa-files-o" aria-hidden="true" style={{"margin-right": '5px'}}></i>So sánh phiên bản</span>
+                            </div>
+                            <div><span onClick={this.props.closePopup}><i className="fa fa-times" style={{'font-size': '30px', 'margin-left': '100px','cursor': 'pointer'}}></i></span></div>
                         </div>
-                        <div><span onClick={this.props.closePopup}><i className="fa fa-times" style={{'font-size': '30px', 'margin-left': '100px','cursor': 'pointer'}}></i></span></div>
-                    </div>
-                    <div className="popup-main">
-                        <div className="popup-main-content">
-                            <div className="editable-container ">
-                                <div className="title-info" style={{"padding": '0 30px','text-align': 'left'}}>
-                                    <div className="txtTitle">
-                                        {this.props.detailInfo.Title}
+                        <Loading loading={this.props.loadingPopup}>
+                        <div className="popup-main">
+                            <div className="popup-main-content">
+                                <div className="editable-container ">
+                                    <div className="title-info" style={{"padding": '0 30px','text-align': 'left'}}>
+                                        <div className="txtTitle">
+                                            {this.props.detailInfo.Title}
+                                        </div>
+                                        <div className="text">
+                                            {this.props.detailInfo.Sapo}
+                                        </div>
                                     </div>
-                                    <div className="text">
-                                        {this.props.detailInfo.Sapo}
-                                    </div>
-                                </div>
-                                <div className="content-main">
-                                    <div className="content-info">
-                                        <div dangerouslySetInnerHTML={{__html: this.props.detailInfo.Body }} />;
+                                    <div className="content-main">
+                                        <div className="content-info">
+                                            <div dangerouslySetInnerHTML={{__html: this.props.detailInfo.Body }} />;
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="popup-sidebar">
-                            <div className="panel-content">
-                                <div className="sidebar-info">
-                                    <section>
-                                        <header>Thông tin cơ bản</header>
-                                        <div className="section-content">
-                                            <div className="row-info"><label>Avatar</label>
-                                                <div className="avatar-wrap">
+                            <div className="popup-sidebar">
+                                <div className="panel-content">
+                                    <div className="sidebar-info">
+                                        <section>
+                                            <header>Thông tin cơ bản</header>
+                                            <div className="section-content">
+                                                <div className="row-info"><label>Avatar</label>
+                                                    <div className="avatar-wrap">
                                                     <span title="Avatar thường">
                                                         <img className="avatar-item" src={this.props.detailInfo.AvatarCustom} alt="avt"/>
                                                     </span>
+                                                    </div>
+                                                </div>
+                                                <div className="row-info"><label>Dạng bài</label><span>Bài thường (size M)</span>
+                                                </div>
+                                                <div className="row-info"><label>Tác giả</label><span>{this.props.detailInfo.Author}</span>
+                                                </div>
+                                                <div className="row-info"><label>Ngày xuất bản</label><span>{moment(this.props.detailInfo.DistributionDate).format('DD/MM/YYYY')}</span>
+                                                </div>
+                                                <div className="row-info"><label>Tags</label>Chưa
+                                                    chọn tag</div>
+                                                <div className="row-info"><label>Cho phép hiển thị trên trang
+                                                    chủ</label><span>Không</span></div>
+                                                <div className="row-info"><label>Là bài
+                                                    AdStore</label><span>Không</span></div>
+                                                <div className="row-info"><label>Là bài PR</label><span>Không</span>
                                                 </div>
                                             </div>
-                                            <div className="row-info"><label>Dạng bài</label><span>Bài thường (size M)</span>
+                                        </section>
+                                        <section>
+                                            <header>Cài đặt phân phối</header>
+                                            <div className="section-content">
+                                                <div className="row-info"><label>Chuyên mục chính</label><span>Thế giới</span>
+                                                </div>
+                                                <div className="row-info"><label>Chuyên mục phụ</label><span>Thế giới</span>
+                                                </div>
                                             </div>
-                                            <div className="row-info"><label>Tác giả</label><span>{this.props.detailInfo.Author}</span>
-                                            </div>
-                                            <div className="row-info"><label>Ngày xuất bản</label><span>{moment(this.props.detailInfo.CreatedDate).format('DD/MM/YYYY')}</span>
-                                            </div>
-                                            <div className="row-info"><label>Tags</label>Chưa
-                                                chọn tag</div>
-                                            <div className="row-info"><label>Cho phép hiển thị trên trang
-                                                chủ</label><span>Không</span></div>
-                                            <div className="row-info"><label>Là bài
-                                                AdStore</label><span>Không</span></div>
-                                            <div className="row-info"><label>Là bài PR</label><span>Không</span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                    <section>
-                                        <header>Cài đặt phân phối</header>
-                                        <div className="section-content">
-                                            <div className="row-info"><label>Chuyên mục chính</label><span>Thế giới</span>
-                                            </div>
-                                            <div className="row-info"><label>Chuyên mục phụ</label><span>Thế giới</span>
-                                            </div>
-                                        </div>
-                                    </section>
+                                        </section>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        </Loading>
                     </div>
                 </div>
-            </div>
         );
     }
 }
@@ -107,7 +109,7 @@ function Items(props) {
                     </div>
                 </div>
                 <div className="date">
-                    {moment(list.CreatedDate).format('DD/MM/YYYY')}
+                    {moment(list.DistributionDate).format('DD/MM/YYYY')}
                 </div>
                 <div className="zone">
                     {list.ZoneName}
@@ -175,7 +177,9 @@ class Content extends Component {
             dialogVisible: false,
             showPopup: false,
             detailInfo: {},
-            body: null
+            body: null,
+            loading: false,
+            loadingPopup: false
         };
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this);
@@ -199,6 +203,8 @@ class Content extends Component {
         this.setState({
             showPopup: !this.state.showPopup
         });
+        this.setState({detailInfo: []})
+        this.setState({loadingPopup: true})
         var promise = new Promise(function(resolve, reject) {
             var request = new XMLHttpRequest();
             request.onload = function() {
@@ -209,7 +215,7 @@ class Content extends Component {
                 }
             };
             request.open("POST", "http://192.168.25.95:8088/api/base/news/get_news_detail_by_id", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwODgzNzYsIm5iZiI6MTU0MDAwMTk3Nn0.puUCtPCXPoCKztfh5sgpYhB0vX5XBLsX1aWSSg1WgI3Pe_cyGGRKtPO6kcaHnUUp");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAyNjA5MjAsIm5iZiI6MTU0MDE3NDUyMH0.dzFsN9DtI3XvPdGrSGzPkJD6YgC94uZ6Qnii3ifbXv3KuX2ARswFKyvYHTrTZM2_");
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const data = {
                 id: ID
@@ -226,6 +232,7 @@ class Content extends Component {
             var c = b.Data.NewsInfo
             console.log(c)
             this.setState({detailInfo: c})
+            this.setState({loadingPopup: false})
 
         }.bind(this)).catch(function(error) {
             console.log('Error occurred!', error);
@@ -258,14 +265,14 @@ class Content extends Component {
                     for (let i = 0; i < listItems.length; i ++) {
                         if (listSort.length === 0) {
                             var a1 = {}
-                            a1['date'] = moment(listItems[i].CreatedDate).format('DD/MM/YYYY')
+                            a1['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
                             a1['list'] = []
                             a1['list'].push(listItems[i])
                             listSort.push(a1)
                         } else {
                             let t = true
                             for (let j = 0; j < listSort.length; j ++) {
-                                if (moment(listItems[i].CreatedDate).format('DD/MM/YYYY') === listSort[j].date) {
+                                if (moment(listItems[i].DistributionDate).format('DD/MM/YYYY') === listSort[j].date) {
                                     console.log('qq')
                                     listSort[j].list.push(listItems[i])
                                     t = false
@@ -273,7 +280,7 @@ class Content extends Component {
                             }
                             if (t) {
                                 var a1 = {}
-                                a1['date'] = moment(listItems[i].CreatedDate).format('DD/MM/YYYY')
+                                a1['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
                                 a1['list'] = []
                                 a1['list'].push(listItems[i])
                                 listSort.push(a1)
@@ -314,14 +321,14 @@ class Content extends Component {
                     for (let i = 0; i < listItems.length; i ++) {
                         if (listSort.length === 0) {
                             var a1 = {}
-                            a1['date'] = moment(listItems[i].CreatedDate).format('DD/MM/YYYY')
+                            a1['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
                             a1['list'] = []
                             a1['list'].push(listItems[i])
                             listSort.push(a1)
                         } else {
                             let t = true
                             for (let j = 0; j < listSort.length; j ++) {
-                                if (moment(listItems[i].CreatedDate).format('DD/MM/YYYY') === listSort[j].date) {
+                                if (moment(listItems[i].DistributionDate).format('DD/MM/YYYY') === listSort[j].date) {
                                     console.log('qq')
                                     listSort[j].list.push(listItems[i])
                                     t = false
@@ -329,7 +336,7 @@ class Content extends Component {
                             }
                             if (t) {
                                 var a1 = {}
-                                a1['date'] = moment(listItems[i].CreatedDate).format('DD/MM/YYYY')
+                                a1['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
                                 a1['list'] = []
                                 a1['list'].push(listItems[i])
                                 listSort.push(a1)
@@ -350,6 +357,7 @@ class Content extends Component {
         this.setState({selectedZone: zoneSelected})
     }
     handleFilter(page) {
+        this.setState({loading: true})
         this.setState({filter: true})
         console.log('page')
         console.log(page)
@@ -371,7 +379,7 @@ class Content extends Component {
                 }
             };
             request.open("POST", "http://192.168.25.95:8088/api/base/news/search_news", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwODgzNzYsIm5iZiI6MTU0MDAwMTk3Nn0.puUCtPCXPoCKztfh5sgpYhB0vX5XBLsX1aWSSg1WgI3Pe_cyGGRKtPO6kcaHnUUp");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAyNjA5MjAsIm5iZiI6MTU0MDE3NDUyMH0.dzFsN9DtI3XvPdGrSGzPkJD6YgC94uZ6Qnii3ifbXv3KuX2ARswFKyvYHTrTZM2_");
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const data = {
                 zone: selectedZone,
@@ -382,8 +390,8 @@ class Content extends Component {
                 order: '0'
             }
             if (dateS !== '' && dateE !== '') {
-                data["minDate"] = dateS
-                data["maxDate"] = dateE
+                data["from"] = dateS
+                data["to"] = dateE
             }
             var params = typeof data == 'string' ? data : Object.keys(data).map(
                 function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
@@ -410,14 +418,14 @@ class Content extends Component {
                 for (let i = 0; i < listItems.length; i ++) {
                     if (listSort.length === 0) {
                         var a1 = {}
-                        a1['date'] = moment(listItems[i].CreatedDate).format('DD/MM/YYYY')
+                        a1['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
                         a1['list'] = []
                         a1['list'].push(listItems[i])
                         listSort.push(a1)
                     } else {
                         let t = true
                         for (let j = 0; j < listSort.length; j ++) {
-                            if (moment(listItems[i].CreatedDate).format('DD/MM/YYYY') === listSort[j].date) {
+                            if (moment(listItems[i].DistributionDate).format('DD/MM/YYYY') === listSort[j].date) {
                                 console.log('qq')
                                 listSort[j].list.push(listItems[i])
                                 t = false
@@ -425,7 +433,7 @@ class Content extends Component {
                         }
                         if (t) {
                             var a1 = {}
-                            a1['date'] = moment(listItems[i].CreatedDate).format('DD/MM/YYYY')
+                            a1['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
                             a1['list'] = []
                             a1['list'].push(listItems[i])
                             listSort.push(a1)
@@ -435,6 +443,7 @@ class Content extends Component {
                 console.log('listsort')
                 console.log(listSort)
                 this.setState({listSort: listSort})
+                this.setState({loading: false})
             }.bind(this))
         }.bind(this)).catch(function(error) {
             console.log('Error occurred!', error);
@@ -482,7 +491,7 @@ class Content extends Component {
                 }
             };
             request.open("GET", "http://192.168.25.95:8088/api/base/news/get_all_zone", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwODgzNzYsIm5iZiI6MTU0MDAwMTk3Nn0.puUCtPCXPoCKztfh5sgpYhB0vX5XBLsX1aWSSg1WgI3Pe_cyGGRKtPO6kcaHnUUp");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAyNjA5MjAsIm5iZiI6MTU0MDE3NDUyMH0.dzFsN9DtI3XvPdGrSGzPkJD6YgC94uZ6Qnii3ifbXv3KuX2ARswFKyvYHTrTZM2_");
             request.send();
         });
         promise.then(function(data) {
@@ -496,6 +505,7 @@ class Content extends Component {
         });
     }
     getList(page, callback) {
+        this.setState({loading: true})
         var promise = new Promise(function(resolve, reject) {
             var request = new XMLHttpRequest();
             request.onload = function() {
@@ -506,7 +516,7 @@ class Content extends Component {
                 }
             };
             request.open("POST", "http://192.168.25.95:8088/api/base/news/list_news_by_status", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAwODgzNzYsIm5iZiI6MTU0MDAwMTk3Nn0.puUCtPCXPoCKztfh5sgpYhB0vX5XBLsX1aWSSg1WgI3Pe_cyGGRKtPO6kcaHnUUp");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAyNjA5MjAsIm5iZiI6MTU0MDE3NDUyMH0.dzFsN9DtI3XvPdGrSGzPkJD6YgC94uZ6Qnii3ifbXv3KuX2ARswFKyvYHTrTZM2_");
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const data = {
                 status: '8',
@@ -541,14 +551,14 @@ class Content extends Component {
             for (let i = 0; i < listItems.length; i ++) {
                 if (listSort.length === 0) {
                     var a1 = {}
-                    a1['date'] = moment(listItems[i].CreatedDate).format('DD/MM/YYYY')
+                    a1['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
                     a1['list'] = []
                     a1['list'].push(listItems[i])
                     listSort.push(a1)
                 } else {
                     let t = true
                     for (let j = 0; j < listSort.length; j ++) {
-                        if (moment(listItems[i].CreatedDate).format('DD/MM/YYYY') === listSort[j].date) {
+                        if (moment(listItems[i].DistributionDate).format('DD/MM/YYYY') === listSort[j].date) {
                             console.log('qq')
                             listSort[j].list.push(listItems[i])
                             t = false
@@ -556,7 +566,7 @@ class Content extends Component {
                     }
                     if (t) {
                         var a1 = {}
-                        a1['date'] = moment(listItems[i].CreatedDate).format('DD/MM/YYYY')
+                        a1['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
                         a1['list'] = []
                         a1['list'].push(listItems[i])
                         listSort.push(a1)
@@ -566,6 +576,7 @@ class Content extends Component {
             console.log('listsort')
             console.log(listSort)
             this.setState({listSort: listSort})
+            this.setState({loading: false})
         })
         this.getListZone()
     }
@@ -676,15 +687,18 @@ class Content extends Component {
                                         </div>
                                     </div>
                                 </div>
+                                <Loading loading={this.state.loading}>
                                 <List
                                     list={this.state.listSort}
                                     togglePopup={(value, id) => this.togglePopup(value, id)}
                                 />
+                                </Loading>
                                 {this.state.showPopup ?
                                     <Popup
                                         closePopup={this.togglePopup.bind(this)}
                                         detailInfo = {this.state.detailInfo}
                                         body = {this.state.body}
+                                        loadingPopup = {this.state.loadingPopup}
                                     />
                                     : null
                                 }

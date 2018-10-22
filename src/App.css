@@ -25,6 +25,7 @@ html, body, .app {
   display: flex;
 }
 .form-list-item {
+    padding-left: inherit;
   list-style-type: none;
   height: -webkit-fill-available;
   display: flex;
