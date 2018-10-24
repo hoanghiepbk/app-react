@@ -30,7 +30,6 @@ html, body, .app {
   height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
 }
 /*------------POPUP-----------------*/
 .popup {
@@ -279,7 +278,7 @@ html, body, .app {
   position: relative;
   z-index: 12;
   float: left;
-  height: 100%;
+  height: calc(100% - 40px);
   align-items: baseline;
   justify-content: center;
   color: white;
@@ -293,7 +292,7 @@ html, body, .app {
   width: 96.8%;
   float: right;
   background-color: #eceff4;
-  height: 100%;
+  height: calc(100% - 40px);
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -363,12 +362,16 @@ html, body, .app {
 /*---------TABLE-----------*/
 .table {
   display: flex;
-  height: 100%;
+  height: -webkit-fill-available;
   width: 80%;
   float: left;
   background-color: #F8F8F8;
   color: black;
   flex-direction: column;
+}
+.box-table {
+  overflow-y: scroll ;
+height: calc(100vh - 165px) !important
 }
 /* header table*/
 .header-table {
@@ -452,7 +455,6 @@ html, body, .app {
   margin-right: 7px;
 }
 .table-content {
-  height: 100%;
   width: 95%;
   float: left;
   color: black;
@@ -634,7 +636,7 @@ html, body, .app {
 }
 /*right item table*/
 .sidebar-right {
-  height: 100%;
+  height: -webkit-fill-available;
   width: 5%;
   float: left;
   color: black;

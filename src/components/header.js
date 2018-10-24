@@ -6,7 +6,7 @@ class Header extends Component {
         return (
             <div>
                 <div className="home-button">
-                    <a href="#"></a>
+                    <i className="fas fa-chart-line" style={{"margin-top": 7+ "px","color": "white","font-size": 23+ "px"}}></i>
                 </div>
                 <div className="one-nav-item">
                     <i className="fa fa-edit"></i>
@@ -15,7 +15,7 @@ class Header extends Component {
                     <i className="el-icon-edit"></i> BÀI VIẾT
                 </div>
                 <div className="one-nav-item-2">
-                    <i className="fa fa-youtube"></i> VIDEO
+                    <i className="fab fa-youtube"></i> VIDEO
                 </div>
                 <div className="one-nav-item-2">
                     <i className="fa fa-cog"></i> CẤU HÌNH

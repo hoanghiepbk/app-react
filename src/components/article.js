@@ -215,7 +215,7 @@ class Content extends Component {
                 }
             };
             request.open("POST", "http://192.168.25.95:8088/api/base/news/get_news_detail_by_id", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAyNjA5MjAsIm5iZiI6MTU0MDE3NDUyMH0.dzFsN9DtI3XvPdGrSGzPkJD6YgC94uZ6Qnii3ifbXv3KuX2ARswFKyvYHTrTZM2_");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDA0MzMyNjcsIm5iZiI6MTU0MDM0Njg2N30.aM-WG0WjydR2CAB0BcxTtWdAPdvaLAQ5KLtE1SOdYstyFfyLjf7_MtTTIfhW4dpA");
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const data = {
                 id: ID
@@ -290,6 +290,7 @@ class Content extends Component {
                     console.log('listsort')
                     console.log(listSort)
                     this.setState({listSort: listSort})
+                    this.setState({loading: false})
                     console.log('listSort on state')
                     console.log(this.state.listSort)
                 })
@@ -346,6 +347,7 @@ class Content extends Component {
                     console.log('listsort')
                     console.log(listSort)
                     this.setState({listSort: listSort})
+                    this.setState({loading: false})
                     console.log('listSort on state')
                     console.log(this.state.listSort)
                 })
@@ -379,7 +381,7 @@ class Content extends Component {
                 }
             };
             request.open("POST", "http://192.168.25.95:8088/api/base/news/search_news", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAyNjA5MjAsIm5iZiI6MTU0MDE3NDUyMH0.dzFsN9DtI3XvPdGrSGzPkJD6YgC94uZ6Qnii3ifbXv3KuX2ARswFKyvYHTrTZM2_");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDA0MzMyNjcsIm5iZiI6MTU0MDM0Njg2N30.aM-WG0WjydR2CAB0BcxTtWdAPdvaLAQ5KLtE1SOdYstyFfyLjf7_MtTTIfhW4dpA");
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const data = {
                 zone: selectedZone,
@@ -491,7 +493,7 @@ class Content extends Component {
                 }
             };
             request.open("GET", "http://192.168.25.95:8088/api/base/news/get_all_zone", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAyNjA5MjAsIm5iZiI6MTU0MDE3NDUyMH0.dzFsN9DtI3XvPdGrSGzPkJD6YgC94uZ6Qnii3ifbXv3KuX2ARswFKyvYHTrTZM2_");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDA0MzMyNjcsIm5iZiI6MTU0MDM0Njg2N30.aM-WG0WjydR2CAB0BcxTtWdAPdvaLAQ5KLtE1SOdYstyFfyLjf7_MtTTIfhW4dpA");
             request.send();
         });
         promise.then(function(data) {
@@ -516,7 +518,7 @@ class Content extends Component {
                 }
             };
             request.open("POST", "http://192.168.25.95:8088/api/base/news/list_news_by_status", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDAyNjA5MjAsIm5iZiI6MTU0MDE3NDUyMH0.dzFsN9DtI3XvPdGrSGzPkJD6YgC94uZ6Qnii3ifbXv3KuX2ARswFKyvYHTrTZM2_");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDA0MzMyNjcsIm5iZiI6MTU0MDM0Njg2N30.aM-WG0WjydR2CAB0BcxTtWdAPdvaLAQ5KLtE1SOdYstyFfyLjf7_MtTTIfhW4dpA");
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const data = {
                 status: '8',
@@ -591,36 +593,36 @@ class Content extends Component {
                         <div className="box-item">
                             <span className="small-title">Tin bài</span>
                             <ul className="list-box">
-                                <li><i className="fa fa-heart"></i>Bài lưu tạm</li>
-                                <li><i className="fa fa-heart"></i>Bài chờ biên tập</li>
-                                <li><i className="fa fa-heart"></i>Bài chờ xuất bản</li>
-                                <li><i className="fa fa-heart"></i>Bài nhận biên tập</li>
-                                <li><i className="fa fa-heart"></i>Bài nhận xuất bản</li>
-                                <li><i className="fa fa-heart"></i>Bài đã được xuất bản</li>
-                                <li><i className="fa fa-heart"></i>Bài bị trả lại</li>
-                                <li><i className="fa fa-heart"></i>Bài bị trả lại biên tập</li>
-                                <li><i className="fa fa-heart"></i>Bài bị gỡ xuống</li>
-                                <li><i className="fa fa-heart"></i>Bài bị xóa</li>
+                                <li><i className="fa fa-save"></i>Bài lưu tạm</li>
+                                <li><i className="fa fa-pause"></i>Bài chờ biên tập</li>
+                                <li><i className="fas fa-file-signature"></i>Bài chờ xuất bản</li>
+                                <li><i className="fa fa-file"></i>Bài nhận biên tập</li>
+                                <li><i className="fa fa-upload"></i>Bài nhận xuất bản</li>
+                                <li><i className="fa fa-file-medical-alt"></i>Bài đã được xuất bản</li>
+                                <li><i className="fa fa-undo"></i>Bài bị trả lại</li>
+                                <li><i className="fa fa-exclamation-triangle"></i>Bài bị trả lại biên tập</li>
+                                <li><i className="fa fa-window-close"></i>Bài bị gỡ xuống</li>
+                                <li><i className="fa fa-trash"></i>Bài bị xóa</li>
                             </ul>
                         </div>
                         <div className="box-item">
                             <span className="small-title">Dạng bài đặc biệt</span>
                             <ul className="list-box">
-                                <li><i className="fa fa-heart"></i>Tường thuật sự kiện</li>
-                                <li><i className="fa fa-heart"></i>Tường thuật bóng đá</li>
-                                <li><i className="fa fa-heart"></i>Giao lưu trực tuyến</li>
+                                <li><i className="fas fa-globe-americas"></i>Tường thuật sự kiện</li>
+                                <li><i className="fa fa-futbol"></i>Tường thuật bóng đá</li>
+                                <li><i className="fa fa-chalkboard-teacher"></i>Giao lưu trực tuyến</li>
                             </ul>
                         </div>
                         <div className="box-item">
                             <span className="small-title">Bình luận</span>
                             <ul className="list-box">
-                                <li><i className="fa fa-heart"></i>Quản lý bình luận</li>
+                                <li><i className="fas fa-comments"></i>Quản lý bình luận</li>
                             </ul>
                         </div>
                         <div className="box-item" style={{'border-bottom': 'none'}}>
                             <span className="small-title">Khảo sát</span>
                             <ul className="list-box">
-                                <li><i className="fa fa-heart"></i>Quản lý khảo sát</li>
+                                <li><i className="fas fa-chart-bar"></i>Quản lý khảo sát</li>
                             </ul>
                         </div>
                     </div>
@@ -642,7 +644,6 @@ class Content extends Component {
                         <div className='body-table'>
                             <div className="table-content">
                                 <div className="nav-table">
-                                    <div className="nav-button">
                                         <div style={{width: 150 + 'px'}}>
                                             <Select value={this.state.value} placeholder={'Chuyên mục'} onChange={this.selectedZone}>
                                                 {
@@ -675,7 +676,6 @@ class Content extends Component {
                                         <div className="button-nav" style={{background: '#FAFAFA'}} onClick={this.handleFilter}>
                                             LỌC
                                         </div>
-                                    </div>
                                     <div className="pagination-box">
                                         <div className="pagination-p">
                                             {this.state.a} đến {this.state.list.length < 50 ? this.state.total : this.state.b} trong số {this.state.total} bài
@@ -687,21 +687,23 @@ class Content extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <Loading loading={this.state.loading}>
-                                <List
-                                    list={this.state.listSort}
-                                    togglePopup={(value, id) => this.togglePopup(value, id)}
-                                />
-                                </Loading>
-                                {this.state.showPopup ?
-                                    <Popup
-                                        closePopup={this.togglePopup.bind(this)}
-                                        detailInfo = {this.state.detailInfo}
-                                        body = {this.state.body}
-                                        loadingPopup = {this.state.loadingPopup}
-                                    />
-                                    : null
-                                }
+                                <div className="box-table">
+                                    <Loading loading={this.state.loading}>
+                                        <List
+                                            list={this.state.listSort}
+                                            togglePopup={(value, id) => this.togglePopup(value, id)}
+                                        />
+                                    </Loading>
+                                    {this.state.showPopup ?
+                                        <Popup
+                                            closePopup={this.togglePopup.bind(this)}
+                                            detailInfo = {this.state.detailInfo}
+                                            body = {this.state.body}
+                                            loadingPopup = {this.state.loadingPopup}
+                                        />
+                                        : null
+                                    }
+                                </div>
                             </div>
                             <div className="sidebar-right">
                                 <div className="one-nav-item-3">
