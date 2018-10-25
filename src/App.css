@@ -147,6 +147,7 @@ html, body, .app {
   font-family: SFD-Bold;
 }
 .popup-main-content {
+  height: calc(100vh - 70px) !important;
   width: 1127px;
   background-color: #F4F4F4;
   overflow-y: scroll;
@@ -173,22 +174,22 @@ html, body, .app {
   margin: 0 auto;
 }
 .popup-sidebar {
+  overflow-y: scroll;
   float: left;
   width: 360px;
-  height: 100%;
   border-left: 1px solid #e4e4e4;
   background: #fff;
   -webkit-flex-direction: column;
   position: relative;
   display: flex;
   flex: none;
+  height: calc(100vh - 70px) !important;
 }
 .panel-content {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
   height: 100%;
-  overflow-y: scroll;
 }
 .sidebar-info {
   width: 100%;
@@ -241,11 +242,13 @@ html, body, .app {
 }
 
 .home-button {
+  border-bottom: 1px solid;
   position: relative;
   background-color: #2ea2c7;
   height: 40px;
   width: 3.2%;
   float: left;
+  min-width: 50px;
 }
 .nav-button {
   display: flex;
@@ -264,6 +267,11 @@ html, body, .app {
   font-size: 16px;
   cursor: pointer;
 }
+@media screen and (max-width: 750px) {
+  .one-nav-item-2 {
+    display: none;
+  }
+}
 .one-nav-item-3 {
   margin: 10px;
   font-size: 26px;
@@ -272,6 +280,7 @@ html, body, .app {
 }
 /*------------ASIDE--------------*/
 .App-aside {
+  min-width: 50px;
   background: #192d3f;
   width: 3.2%;
   display: flex;
@@ -287,6 +296,14 @@ html, body, .app {
   margin-top: 20px;
 }
 /*--------ARTICLE----------*/
+.datePicker {
+  margin-left: 15px;
+}
+@media screen and (max-width: 750px) {
+  .datePicker {
+    display: none;
+  }
+}
 .App-article {
   align-items: center;
   width: 96.8%;
@@ -301,6 +318,7 @@ html, body, .app {
 }
 /*----------SIDEBAR---------*/
 .sidebar {
+  min-width: 200px;
   display: flex;
   height: -webkit-fill-available;
   width: 20%;
@@ -329,6 +347,12 @@ html, body, .app {
   margin: 35px 25px 20px 25px;
   border-bottom: 1px solid rgba(8, 18, 28, 0.1);
 }
+@media screen and (max-width: 1170px) {
+  .box-item {
+    margin: 35px 25px 20px 0px;
+    border-bottom: 1px solid rgba(8, 18, 28, 0.1);
+  }
+}
 .small-title {
   font-size: 14px;
   font-weight: 700;
@@ -340,6 +364,12 @@ html, body, .app {
 .list-box {
   text-align: left;
   list-style-type: none;
+  padding-left: 25px;
+}
+@media screen and (max-width: 1170px) {
+  .list-box {
+    padding-left: 25px;
+  }
 }
 
 .list-box li {
@@ -368,6 +398,20 @@ html, body, .app {
   background-color: #F8F8F8;
   color: black;
   flex-direction: column;
+}
+@media screen and (max-width: 1070px) {
+  .table {
+    position: absolute;
+    overflow-x: scroll;
+    min-width: 500px;
+    height: -webkit-fill-available;
+    width: 80%;
+    float: left;
+    background-color: #F8F8F8;
+    color: black;
+    flex-direction: column;
+    margin-left: 199px;
+  }
 }
 .box-table {
   overflow-y: scroll ;
@@ -481,14 +525,21 @@ height: calc(100vh - 165px) !important
 }
 .pagination-p {
   float: left;
-  margin-top: 32px;
+  flex-grow: 1;
   color: #424649;
   font-size: 13px;
   margin-right: 5px;
+  min-width: 100px;
+}
+@media only screen and (max-width: 800px) {
+  .pagination-p {
+    display: none;
+  }
 }
 .pagination {
   float: right;
-  margin-top: 10px;
+  margin-right: 10px;
+  margin-top: 20px;
   padding: 20px;
   margin-bottom: 20px;
 }
@@ -505,6 +556,7 @@ height: calc(100vh - 165px) !important
 }
 .previous-page,
 .next-page {
+  cursor: pointer;
   display: inline-block;
   color: #717171;
   padding: 3px 9px;
@@ -526,8 +578,11 @@ height: calc(100vh - 165px) !important
   padding: 0;
   outline: none;
 }
+.list-items {
+  padding-left: 15px;
+}
 .list {
-  padding: 0 40px;
+  padding: 0 12px;
   flex-grow: 1;
   box-sizing: border-box;
   margin: 0;
@@ -567,6 +622,7 @@ height: calc(100vh - 165px) !important
   margin: 0 75px 0 150px;
 }
 .tool-setting {
+  min-width: 66px;
   padding-bottom: 9px;
   color:#637585;
   margin-right: 18px;
@@ -595,10 +651,14 @@ height: calc(100vh - 165px) !important
   height: 64px;
   flex: none;
   display: block;
+  margin-right: 10px;
 }
 .detail-main-info {
+  display: contents;
     float: left;
-    width: 405px;
+}
+.detail-info {
+  min-width: 610px;
 }
 .detail-info-title {
     text-align: left;

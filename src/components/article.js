@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../App.css'
-import { Select, DatePicker,Dialog, Button, Loading } from 'element-react';
+import { Select, DatePicker, Loading } from 'element-react';
 import 'element-theme-default';
 import { i18n } from 'element-react';
 import locale from 'element-react/src/locale/lang/en'
@@ -14,16 +14,16 @@ class Popup extends React.Component {
                     <div className='popup_inner'>
                         <div className="popup-header">
                             <div className="btn-group">
-                                <span className="btn"><i className="fa fa-history"aria-hidden="true" style={{"margin-right": '5px'}}></i>Xem lịch sử</span>
-                                <span className="btn"><i className="fa fa-files-o" aria-hidden="true" style={{"margin-right": '5px'}}></i>So sánh phiên bản</span>
+                                <span className="btn"><i className="fa fa-history"aria-hidden="true" style={{"marginRight": '5px'}}></i>Xem lịch sử</span>
+                                <span className="btn"><i className="fa fa-files-o" aria-hidden="true" style={{"marginRight": '5px'}}></i>So sánh phiên bản</span>
                             </div>
-                            <div><span onClick={this.props.closePopup}><i className="fa fa-times" style={{'font-size': '30px', 'margin-left': '100px','cursor': 'pointer'}}></i></span></div>
+                            <div><span onClick={this.props.closePopup}><i className="fa fa-times" style={{'fontSize': '30px', 'marginLeft': '100px','cursor': 'pointer'}}></i></span></div>
                         </div>
                         <Loading loading={this.props.loadingPopup}>
                         <div className="popup-main">
                             <div className="popup-main-content">
                                 <div className="editable-container ">
-                                    <div className="title-info" style={{"padding": '0 30px','text-align': 'left'}}>
+                                    <div className="title-info" style={{"padding": '0 30px','textAlign': 'left'}}>
                                         <div className="txtTitle">
                                             {this.props.detailInfo.Title}
                                         </div>
@@ -87,18 +87,17 @@ class Popup extends React.Component {
     }
 }
 function Items(props) {
-    console.log('render 2')
     const list = props.list
     const listItems = list.map((list) =>
-        <div className="list-detail">
+        <div className="list-detail" key={list.Id}>
             <div className="list-detail-main">
                 <div className="tool-setting">
                     <input type="checkbox" name="check" value="checked"></input>
                     <input className="star" type="checkbox" title="bookmark page"></input>
-                    <i className="fa fa-heart" style={{'font-size': 14 + 'px', 'margin-left': 12 + 'px'}}></i>
+                    <i className="fa fa-heart" style={{'fontSize': 14 + 'px', 'marginLeft': 12 + 'px'}}></i>
                 </div>
                 <div className="detail-info">
-                    <img className="avatar"/>
+                    <img alt="" className="avatar"/>
                     <div className="detail-main-info">
                         <div className="detail-info-title" onClick={() => props.togglePopup(list, list.EncryptId)}>
                             {list.Title}
@@ -124,16 +123,15 @@ function Items(props) {
         </div>
     );
     return (
-        <ul style={{'list-style-type': 'none'}}>
+        <ul className="list-items">
             {listItems}
         </ul>
     );
 }
 function List(props) {
-    console.log('render')
     const list = props.list
-    const listItems = list.map((list) =>
-        <li>
+    const listItems = list.map((list, index) =>
+        <li key={index}>
             <div className="main-table">
                 <div className="list">
                     <div className="list-group">
@@ -164,7 +162,7 @@ class Content extends Component {
             list3: [],
             listFilter: [],
             listSort: [],
-            a: 0,
+            a: 1,
             b: 50,
             page: 1,
             total: 0,
@@ -172,8 +170,8 @@ class Content extends Component {
             filter: false,
             value: '',
             selectedZone: '',
-            dateStart: '',
-            dateEnd: '',
+            dateStart: null,
+            dateEnd: null,
             dialogVisible: false,
             showPopup: false,
             detailInfo: {},
@@ -208,29 +206,27 @@ class Content extends Component {
         var promise = new Promise(function(resolve, reject) {
             var request = new XMLHttpRequest();
             request.onload = function() {
-                if (request.status == 200) {
+                if (request.status === 200) {
                     resolve(request.response); // we got data here, so resolve the Promise
                 } else {
                     reject(Error(request.statusText)); // status is not 200 OK, so reject
                 }
             };
             request.open("POST", "http://192.168.25.95:8088/api/base/news/get_news_detail_by_id", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDA0MzMyNjcsIm5iZiI6MTU0MDM0Njg2N30.aM-WG0WjydR2CAB0BcxTtWdAPdvaLAQ5KLtE1SOdYstyFfyLjf7_MtTTIfhW4dpA");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDA1MTk1MjMsIm5iZiI6MTU0MDQzMzEyM30.A5xQcwTIhQ1snuhTgD40UXtUyorwRsulrtSSAj8mrOWaQArjIETZIk0m6Fs5vo8T");
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const data = {
                 id: ID
             }
-            var params = typeof data == 'string' ? data : Object.keys(data).map(
+            var params = typeof data === 'string' ? data : Object.keys(data).map(
                 function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
             ).join('&');
             request.send(params);
         });
         promise.then(function(data) {
-            console.log('Got data! Get list.');
             var a = data
             var b = JSON.parse(a)
             var c = b.Data.NewsInfo
-            console.log(c)
             this.setState({detailInfo: c})
             this.setState({loadingPopup: false})
 
@@ -264,16 +260,15 @@ class Content extends Component {
                     var listSort = this.state.listSort
                     for (let i = 0; i < listItems.length; i ++) {
                         if (listSort.length === 0) {
-                            var a1 = {}
-                            a1['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
-                            a1['list'] = []
-                            a1['list'].push(listItems[i])
-                            listSort.push(a1)
+                            var a2 = {}
+                            a2['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
+                            a2['list'] = []
+                            a2['list'].push(listItems[i])
+                            listSort.push(a2)
                         } else {
                             let t = true
                             for (let j = 0; j < listSort.length; j ++) {
                                 if (moment(listItems[i].DistributionDate).format('DD/MM/YYYY') === listSort[j].date) {
-                                    console.log('qq')
                                     listSort[j].list.push(listItems[i])
                                     t = false
                                 }
@@ -287,12 +282,8 @@ class Content extends Component {
                             }
                         }
                     }
-                    console.log('listsort')
-                    console.log(listSort)
                     this.setState({listSort: listSort})
                     this.setState({loading: false})
-                    console.log('listSort on state')
-                    console.log(this.state.listSort)
                 })
             }
         }
@@ -321,16 +312,15 @@ class Content extends Component {
                     var listSort = this.state.listSort
                     for (let i = 0; i < listItems.length; i ++) {
                         if (listSort.length === 0) {
-                            var a1 = {}
-                            a1['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
-                            a1['list'] = []
-                            a1['list'].push(listItems[i])
-                            listSort.push(a1)
+                            var a2 = {}
+                            a2['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
+                            a2['list'] = []
+                            a2['list'].push(listItems[i])
+                            listSort.push(a2)
                         } else {
                             let t = true
                             for (let j = 0; j < listSort.length; j ++) {
                                 if (moment(listItems[i].DistributionDate).format('DD/MM/YYYY') === listSort[j].date) {
-                                    console.log('qq')
                                     listSort[j].list.push(listItems[i])
                                     t = false
                                 }
@@ -344,12 +334,8 @@ class Content extends Component {
                             }
                         }
                     }
-                    console.log('listsort')
-                    console.log(listSort)
                     this.setState({listSort: listSort})
                     this.setState({loading: false})
-                    console.log('listSort on state')
-                    console.log(this.state.listSort)
                 })
             }
         }
@@ -361,27 +347,23 @@ class Content extends Component {
     handleFilter(page) {
         this.setState({loading: true})
         this.setState({filter: true})
-        console.log('page')
-        console.log(page)
         if (isNaN(page)) {
             page = 1
         }
-        console.log(page)
-        console.log('run')
         const selectedZone = this.state.selectedZone
         const dateS = moment(this.state.dateStart).format('DD/MM/YYYY')
         const dateE = moment(this.state.dateEnd).format('DD/MM/YYYY')
         var promise = new Promise(function(resolve, reject) {
             var request = new XMLHttpRequest();
             request.onload = function() {
-                if (request.status == 200) {
+                if (request.status === 200) {
                     resolve(request.response); // we got data here, so resolve the Promise
                 } else {
                     reject(Error(request.statusText)); // status is not 200 OK, so reject
                 }
             };
             request.open("POST", "http://192.168.25.95:8088/api/base/news/search_news", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDA0MzMyNjcsIm5iZiI6MTU0MDM0Njg2N30.aM-WG0WjydR2CAB0BcxTtWdAPdvaLAQ5KLtE1SOdYstyFfyLjf7_MtTTIfhW4dpA");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDA1MTk1MjMsIm5iZiI6MTU0MDQzMzEyM30.A5xQcwTIhQ1snuhTgD40UXtUyorwRsulrtSSAj8mrOWaQArjIETZIk0m6Fs5vo8T");
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const data = {
                 zone: selectedZone,
@@ -395,40 +377,35 @@ class Content extends Component {
                 data["from"] = dateS
                 data["to"] = dateE
             }
-            var params = typeof data == 'string' ? data : Object.keys(data).map(
+            var params = typeof data === 'string' ? data : Object.keys(data).map(
                 function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
             ).join('&');
             request.send(params);
         });
         promise.then(function(data) {
             var filer = new Promise(function(resolve, reject) {
-                console.log('Got data! Promise fulfilled.');
                 var a = data
                 var total = JSON.parse(a).Data.TotalRow
                 this.setState({total: total})
                 var b = JSON.parse(a).Data.News
-                console.log('filter')
-                console.log(b)
                 resolve(b)
                 this.setState({list: b})
             }.bind(this));
             filer.then(function(data) {
-                console.log('afff')
                 const listItems = data
                 this.setState({listSort: []})
                 var listSort = this.state.listSort
                 for (let i = 0; i < listItems.length; i ++) {
                     if (listSort.length === 0) {
-                        var a1 = {}
-                        a1['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
-                        a1['list'] = []
-                        a1['list'].push(listItems[i])
-                        listSort.push(a1)
+                        var a2 = {}
+                        a2['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
+                        a2['list'] = []
+                        a2['list'].push(listItems[i])
+                        listSort.push(a2)
                     } else {
                         let t = true
                         for (let j = 0; j < listSort.length; j ++) {
                             if (moment(listItems[i].DistributionDate).format('DD/MM/YYYY') === listSort[j].date) {
-                                console.log('qq')
                                 listSort[j].list.push(listItems[i])
                                 t = false
                             }
@@ -442,8 +419,6 @@ class Content extends Component {
                         }
                     }
                 }
-                console.log('listsort')
-                console.log(listSort)
                 this.setState({listSort: listSort})
                 this.setState({loading: false})
             }.bind(this))
@@ -486,21 +461,19 @@ class Content extends Component {
         var promise = new Promise(function(resolve, reject) {
             var request = new XMLHttpRequest();
             request.onload = function() {
-                if (request.status == 200) {
+                if (request.status === 200) {
                     resolve(request.response); // we got data here, so resolve the Promise
                 } else {
                     reject(Error(request.statusText)); // status is not 200 OK, so reject
                 }
             };
             request.open("GET", "http://192.168.25.95:8088/api/base/news/get_all_zone", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDA0MzMyNjcsIm5iZiI6MTU0MDM0Njg2N30.aM-WG0WjydR2CAB0BcxTtWdAPdvaLAQ5KLtE1SOdYstyFfyLjf7_MtTTIfhW4dpA");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDA1MTk1MjMsIm5iZiI6MTU0MDQzMzEyM30.A5xQcwTIhQ1snuhTgD40UXtUyorwRsulrtSSAj8mrOWaQArjIETZIk0m6Fs5vo8T");
             request.send();
         });
         promise.then(function(data) {
-            console.log('Got data! Lists zone.');
             var a = data
             var b = JSON.parse(a).Data.Zones
-            console.log(b)
             this.setState({listZone: b})
         }.bind(this)).catch(function(error) {
             console.log('Error occurred!', error);
@@ -511,14 +484,14 @@ class Content extends Component {
         var promise = new Promise(function(resolve, reject) {
             var request = new XMLHttpRequest();
             request.onload = function() {
-                if (request.status == 200) {
+                if (request.status === 200) {
                     resolve(request.response); // we got data here, so resolve the Promise
                 } else {
                     reject(Error(request.statusText)); // status is not 200 OK, so reject
                 }
             };
             request.open("POST", "http://192.168.25.95:8088/api/base/news/list_news_by_status", true);
-            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDA0MzMyNjcsIm5iZiI6MTU0MDM0Njg2N30.aM-WG0WjydR2CAB0BcxTtWdAPdvaLAQ5KLtE1SOdYstyFfyLjf7_MtTTIfhW4dpA");
+            request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCJ9.eyJ1bmlxdWVfbmFtZSI6Ik5Yby9hbzR4TDVpeDMwdEFDa2w2amc9PSIsInN1YiI6IjQvMWo4SEEwNGRHRU4yZVl3dS9FaVE9PSIsIm5zcCI6InFUTWZ1ZFhWaG5vUkpUcmFPeFEyMEE9PSIsImxhbmciOiJkdW1QV2V2NTNoSlBRK2xRT1RuSndRPT0iLCJpc3MiOiJNKzJqMG1xa25ZcTlMYmlxbXp3V0t3PT0iLCJhdWQiOiJBbnkiLCJleHAiOjE1NDA1MTk1MjMsIm5iZiI6MTU0MDQzMzEyM30.A5xQcwTIhQ1snuhTgD40UXtUyorwRsulrtSSAj8mrOWaQArjIETZIk0m6Fs5vo8T");
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const data = {
                 status: '8',
@@ -527,18 +500,16 @@ class Content extends Component {
                 num: '50',
                 order: '0'
             }
-            var params = typeof data == 'string' ? data : Object.keys(data).map(
+            var params = typeof data === 'string' ? data : Object.keys(data).map(
                 function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
             ).join('&');
             request.send(params);
         });
         promise.then(function(data) {
-            console.log('Got data! Get list.');
             var a = data
             var total = JSON.parse(a).Data.TotalRow
             this.setState({total: total})
             var b = JSON.parse(a).Data.News
-            console.log(b)
             this.setState({list: b})
             callback()
         }.bind(this)).catch(function(error) {
@@ -547,21 +518,19 @@ class Content extends Component {
     }
     componentDidMount() {
         this.getList(1,() => {
-            console.log('afff')
             const listItems = this.state.list
             var listSort = this.state.listSort
             for (let i = 0; i < listItems.length; i ++) {
                 if (listSort.length === 0) {
-                    var a1 = {}
-                    a1['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
-                    a1['list'] = []
-                    a1['list'].push(listItems[i])
-                    listSort.push(a1)
+                    var a2 = {}
+                    a2['date'] = moment(listItems[i].DistributionDate).format('DD/MM/YYYY')
+                    a2['list'] = []
+                    a2['list'].push(listItems[i])
+                    listSort.push(a2)
                 } else {
                     let t = true
                     for (let j = 0; j < listSort.length; j ++) {
                         if (moment(listItems[i].DistributionDate).format('DD/MM/YYYY') === listSort[j].date) {
-                            console.log('qq')
                             listSort[j].list.push(listItems[i])
                             t = false
                         }
@@ -575,8 +544,6 @@ class Content extends Component {
                     }
                 }
             }
-            console.log('listsort')
-            console.log(listSort)
             this.setState({listSort: listSort})
             this.setState({loading: false})
         })
@@ -619,7 +586,7 @@ class Content extends Component {
                                 <li><i className="fas fa-comments"></i>Quản lý bình luận</li>
                             </ul>
                         </div>
-                        <div className="box-item" style={{'border-bottom': 'none'}}>
+                        <div className="box-item" style={{'borderBottom': 'none'}}>
                             <span className="small-title">Khảo sát</span>
                             <ul className="list-box">
                                 <li><i className="fas fa-chart-bar"></i>Quản lý khảo sát</li>
@@ -653,7 +620,7 @@ class Content extends Component {
                                                 }
                                             </Select>
                                         </div>
-                                        <div style={{'margin-left': 15 + 'px'}}>
+                                        <div className="datePicker">
                                             <DatePicker
                                                 value={this.state.dateStart}
                                                 placeholder="Ngày bắt đầu"
@@ -663,7 +630,7 @@ class Content extends Component {
                                                 }}
                                             />
                                         </div>
-                                        <div style={{'margin-left': 15 + 'px'}}>
+                                        <div className="datePicker">
                                             <DatePicker
                                                 value={this.state.dateEnd}
                                                 placeholder="Ngày kết thúc"
@@ -676,16 +643,14 @@ class Content extends Component {
                                         <div className="button-nav" style={{background: '#FAFAFA'}} onClick={this.handleFilter}>
                                             LỌC
                                         </div>
-                                    <div className="pagination-box">
                                         <div className="pagination-p">
                                             {this.state.a} đến {this.state.list.length < 50 ? this.state.total : this.state.b} trong số {this.state.total} bài
                                         </div>
                                         <div className="pagination">
-                                            <a href="#" onClick={this.handleBackPage} className="previous-page"><i className="fa fa-angle-left"></i></a>
-                                            <a href="#" className="page">{this.state.page}</a>
-                                            <a href="#" onClick={this.handleNextPage} className="next-page"><i className="fa fa-angle-right"></i></a>
+                                            <div  onClick={this.handleBackPage} className="previous-page"><i className="fa fa-angle-left"></i></div>
+                                            <div  className="page">{this.state.page}</div>
+                                            <div  onClick={this.handleNextPage} className="next-page"><i className="fa fa-angle-right"></i></div>
                                         </div>
-                                    </div>
                                 </div>
                                 <div className="box-table">
                                     <Loading loading={this.state.loading}>

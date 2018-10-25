@@ -6,7 +6,7 @@ class Header extends Component {
         return (
             <div>
                 <div className="home-button">
-                    <i className="fas fa-chart-line" style={{"margin-top": 7+ "px","color": "white","font-size": 23+ "px"}}></i>
+                    <i className="fa fa-line-chart" aria-hidden="true" style={{"marginTop": 7+ "px","color": "white","fontSize": 23+ "px"}}></i>
                 </div>
                 <div className="one-nav-item">
                     <i className="fa fa-edit"></i>
@@ -16,6 +16,12 @@ class Header extends Component {
                 </div>
                 <div className="one-nav-item-2">
                     <i className="fab fa-youtube"></i> VIDEO
+                </div>
+                <div className="one-nav-item-2">
+                    <i className="fas fa-book"></i> INSTANT ARTICLE
+                </div>
+                <div className="one-nav-item-2">
+                    <i className="fas fa-comments"></i> THẢO LUẬN
                 </div>
                 <div className="one-nav-item-2">
                     <i className="fa fa-cog"></i> CẤU HÌNH
